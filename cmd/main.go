@@ -25,16 +25,15 @@ func main() {
 
 	//----------------------------DB--------------------------------
 	db, err := db.NewPostgresDB(db.NewDBConfig())
-
 	if err != nil {
 		log.Fatalf("Failed to initialize db: %s\n", err.Error())
 	}
+	//----------------------------DB---------------------------------
 
 	router := http.NewServeMux()
 	if err := initConfig(); err != nil {
 		log.Fatalf("An error during config reading: %s\n", err.Error())
 	}
-	//----------------------------DB---------------------------------
 
 	//------------------------REPOSITORY-----------------------------
 	userRepository := user.NewUserRepository(db)

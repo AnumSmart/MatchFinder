@@ -1,6 +1,10 @@
 package auth
 
-import "net/http"
+import (
+	"matchfinder/pkg/req"
+	"net/http"
+	"os/user"
+)
 
 type AuthHandlerDep struct {
 	AuthService *AuthService
@@ -28,7 +32,10 @@ func (a *AuthHandler) Login() http.HandlerFunc {
 
 func (a *AuthHandler) Register() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte("Registration logics is not created yet\n"))
-		w.Write([]byte(a.AuthService.SayHello()))
+		resp, err := req.Decode[user.User](r.Body)
+		if err != nil {
+			http.Error(w, "Bad info in request", http.StatusBadRequest)
+		}
+		w.Write([]byte("Registered user is:" + resp.Name))
 	}
 }
