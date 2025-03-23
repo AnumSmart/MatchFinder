@@ -1,11 +1,18 @@
 package auth
 
-import "fmt"
+import (
+	"fmt"
+	"matchfinder/internal/user"
+)
 
-type AuthService struct{}
+type AuthService struct {
+	UserRepository *user.UserRepository
+}
 
-func NewAuthService() *AuthService {
-	return &AuthService{}
+func NewAuthService(userRepo *user.UserRepository) *AuthService {
+	return &AuthService{
+		UserRepository: userRepo,
+	}
 }
 
 func (a *AuthService) SayHello() string {

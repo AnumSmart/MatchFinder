@@ -7,6 +7,8 @@ require github.com/spf13/viper v1.20.0
 require (
 	github.com/fsnotify/fsnotify v1.8.0 // indirect
 	github.com/go-viper/mapstructure/v2 v2.2.1 // indirect
+	github.com/jmoiron/sqlx v1.4.0 // indirect
+	github.com/lib/pq v1.10.9 // indirect
 	github.com/pelletier/go-toml/v2 v2.2.3 // indirect
 	github.com/sagikazarmark/locafero v0.8.0 // indirect
 	github.com/sourcegraph/conc v0.3.0 // indirect
