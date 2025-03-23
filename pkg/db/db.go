@@ -2,6 +2,7 @@ package db
 
 import (
 	"fmt"
+	"os"
 
 	"github.com/jmoiron/sqlx"
 )
@@ -13,6 +14,17 @@ type Config struct {
 	Password string
 	DBName   string
 	SSLMode  string
+}
+
+func NewDBConfig() Config {
+	return Config{
+		Host:     "localhost",
+		Port:     "5432",
+		Username: "postgres",
+		Password: os.Getenv("DB_PASSWORD"),
+		DBName:   "postgres",
+		SSLMode:  "disable",
+	}
 }
 
 func NewPostgresDB(cfg Config) (*sqlx.DB, error) {

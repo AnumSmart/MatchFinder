@@ -9,6 +9,7 @@ import (
 	"net/http"
 
 	_ "github.com/lib/pq"
+	"github.com/subosito/gotenv"
 
 	"github.com/spf13/viper"
 )
@@ -18,15 +19,12 @@ const (
 )
 
 func main() {
+	if err := gotenv.Load("C:\\Son_Alex\\GO_projects\\MatchFinder\\MatchFinder\\.env"); err != nil {
+		log.Fatal("error during initializing configs: %s\n", err.Error())
+	}
+
 	//----------------------------DB--------------------------------
-	db, err := db.NewPostgresDB(db.Config{
-		Host:     "localhost",
-		Port:     "5432",
-		Username: "postgres",
-		Password: "my_pass",
-		DBName:   "postgres",
-		SSLMode:  "disable",
-	})
+	db, err := db.NewPostgresDB(db.NewDBConfig())
 
 	if err != nil {
 		log.Fatalf("Failed to initialize db: %s\n", err.Error())
